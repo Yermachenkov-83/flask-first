@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}<title>about</title>{% endblock %}
+
+{% block body %}
+
+    <div class="container mt-5">
+        <h1>Add new comment</h1>
+        <form method="post">
+            <textarea name="comment" id="comment" class="form-control"  placeholder="your comment"></textarea><br>
+            <input type="text" class="form-control" name="person" id="person" placeholder="your name"><br>
+            <input type="text" class="form-control" name="person_info" id="person_info" placeholder="info about you"><br>
+            <button class="btn btn-success" type="submit">Add new comment</button>
+
+        </form>
+    </div>
+
+
+
+
+{% endblock %}
+
