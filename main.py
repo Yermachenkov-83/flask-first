@@ -18,12 +18,13 @@ class Comments(db.Model):
     isActive = db.Column(db.Boolean, default=True)
 
     def __repr__(self):
-        return '<Comments %r>' % self.id
+        return f'comment of: {self.person}'
 
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    comments = Comments.query.order_by(Comments.date).all()
+    return render_template('index.html', data=comments)
 
 
 @app.route('/about')
