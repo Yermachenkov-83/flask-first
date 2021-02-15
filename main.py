@@ -27,6 +27,14 @@ def index():
     return render_template('index.html', data=comments)
 
 
+@app.route('/<int:id>/del')
+def delete(id):
+    comment = Comments.query.get(id)
+    db.session.delete(comment)
+    db.session.commit()
+    return redirect('/')
+
+
 @app.route('/about')
 def about():
     return render_template('about.html')
@@ -49,6 +57,24 @@ def create():
             return "Error"
     else:
         return render_template('create.html')
+
+
+@app.route('/<int:id>/edit', methods=['POST', 'GET'])
+def edit(id):
+    new = Comments.query.get(id)
+    if request.method == 'POST':
+        new.comment = request.form['comment']
+        new.person = request.form['person']
+        new.person_info = request.form['person_info']
+
+        try:
+            db.session.commit()
+            return redirect('/')
+        except:
+            return "Error"
+    else:
+
+        return render_template('edit.html', comment=new)
 
 
 if __name__ == '__main__':

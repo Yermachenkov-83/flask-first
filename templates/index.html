@@ -3,26 +3,25 @@
 {% block title %}<title>index</title>{% endblock %}
 
 {% block body %}
-
-
 <div class="container marketing">
-  <h1>index</h1>
+  <h1>all comments</h1>
   <hr class="my-4">
-  {% for comment in data %}
-
-    <div class="row">
-      <div class="col-lg-4">
-        <h4>{{comment.comment}}</h4>
-        <p>{{comment.person}} ({{comment.person_info}})
-          <a class="p-1" href="#">edit</a>
-          <a class="p-1" href="#">delete</a>
-        </p>
-
-
-      </div><!-- /.col-lg-4 -->
-    </div><!-- /.row -->
-
-  {% endfor %}
+  {% if data|length > 0 %}
+    {% for comment in data %}
+      <div class="row">
+        <div class="col-lg-5">
+          <h4>{{comment.comment}}</h4>
+          <p>{{comment.person}} ({{comment.person_info}})
+            <a class="p-1" href="/{{ comment.id }}/edit">edit</a>
+            <a class="p-1" href="/{{ comment.id }}/del">delete</a>
+          </p>
+        </div><!-- /.col-lg-4 -->
+      </div><!-- /.row -->
+    <br>
+    {% endfor %}
+  {% else %}
+    <p>There are not ene comments yet</p>
+  {% endif %}
 
 </div>
 
